@@ -1,4 +1,3 @@
-# dfid
 Data Collection System (DCS)
 =======================================
 
