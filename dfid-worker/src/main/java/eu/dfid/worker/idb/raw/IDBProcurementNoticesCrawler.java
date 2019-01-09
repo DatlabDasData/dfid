@@ -36,8 +36,10 @@ import eu.dl.worker.utils.http.URLUtils;
 public final class IDBProcurementNoticesCrawler extends BaseDfidIncrementalPagedSourceHttpCrawler {
     private static final String VERSION = "2";
 
-    private static final String RESULT_PAGE_URL_PATTERN = "http://www.iadb.org/en/projects/procurement-notices,"
-            + "8178.html?NoticesType=&Notices=&dateFrom=%s&dateTo=%s";
+    private static final String RESULT_PAGE_URL_PATTERN_1 = "https://www.iadb.org/en/procurement-notices-search?query%5Bquery%5D=&quer" +
+            "y%5BprojectCountry%5D=&query%5Bproject_number%5D=&query%5BdateFrom_plan%5D=";
+    private static final String RESULT_PAGE_URL_PATTERN_2 = "&query%5BdateTo_plan%5D=";
+    private static final String RESULT_PAGE_URL_PATTERN_3 = "&query%5BNoticesType%5D=&query%5BNotices%5D=";
 
     private static final String NEXT_BUTTON_XPATH = "//a[text()='Next ']";
 
@@ -55,7 +57,7 @@ public final class IDBProcurementNoticesCrawler extends BaseDfidIncrementalPaged
     @Override
     protected HtmlPage getSearchResultsStartPageForDate(final LocalDate incrementDate) {
         String dateString = incrementDate.format(URL_DATE_FORMATTER);
-        String resultPageUrl = String.format(RESULT_PAGE_URL_PATTERN, dateString, dateString);
+        String resultPageUrl = RESULT_PAGE_URL_PATTERN_1 + dateString + RESULT_PAGE_URL_PATTERN_2 + dateString + RESULT_PAGE_URL_PATTERN_3;
         try {
             return getWebClient().getPage(resultPageUrl);
         } catch (IOException e) {

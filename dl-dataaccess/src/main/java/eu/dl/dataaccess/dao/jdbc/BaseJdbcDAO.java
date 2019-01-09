@@ -44,7 +44,7 @@ public abstract class BaseJdbcDAO<T> implements BaseDAO<T> {
     /**
      * Page size used in paged methods.
      */
-    public static final Integer PAGE_SIZE = 10000;
+    public static final Integer PAGE_SIZE = 1000;
 
     /**
      * Initializes connection etc.
